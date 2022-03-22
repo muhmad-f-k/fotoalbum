@@ -1,4 +1,4 @@
-# fotoalbum
+## fotoalbum
 Appen skal vise informasjon om brukere, deres fotoalbum og foto i albumene. Informasjonen skal lastes ned fra:
 
 https://jsonplaceholder.typicode.com (Lenker til en ekstern side.)
