@@ -1,39 +1,20 @@
 package com.example.fotoalbum.overview
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.fotoalbum.network.JsonApi
-import com.example.fotoalbum.network.User
+import com.example.fotoalbum.model.User
+import com.example.fotoalbum.repository.Repository
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Response
-import java.lang.Exception
-import java.util.ArrayList
-import javax.security.auth.callback.Callback
 
-class OverviewViewModel : ViewModel() {
+class OverviewViewModel(private val repository: Repository) : ViewModel() {
 
-    private val _users = MutableLiveData<List<User>>()
-    val users: LiveData<List<User>>
-        get() = _users
+    val myResponse: MutableLiveData<User> = MutableLiveData()
 
-    private val _navigateToSelectedUser = MutableLiveData<User>()
-    val navigateToSelectedUser: LiveData<User>
-        get() = _navigateToSelectedUser
-
-    init {
-        getUsers()
-    }
-
-    private fun getUsers() {
+    fun getUsers(){
         viewModelScope.launch {
-            try {
-                _users.value = JsonApi.retrofitService.getUsers()
-            }catch (e: Exception) {
-                _users.value = ArrayList()
-            }
+            val response = repository.getUsers()
+            myResponse.value = response
         }
     }
 }
