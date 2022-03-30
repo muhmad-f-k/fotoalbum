@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/titleFragment">
+
+    <fragment
+        android:id="@+id/titleFragment"
+        android:name="com.example.fotoalbum.overview.TitleFragment"
+        android:label="title_fragment"
+        tools:layout="@layout/title_fragment" >
+        <action
+            android:id="@+id/action_titleFragment_to_userAlbums"
+            app:destination="@id/userAlbums" />
+    </fragment>
+    <fragment
+        android:id="@+id/userAlbums"
+        android:name="com.example.fotoalbum.user_albums.UserAlbums"
+        android:label="user_albums_fragment"
+        tools:layout="@layout/user_albums_fragment" >
+        <action
+            android:id="@+id/action_userAlbums_to_albumPhotos"
+            app:destination="@id/albumPhotos" />
+    </fragment>
+    <fragment
+        android:id="@+id/albumPhotos"
+        android:name="com.example.fotoalbum.album_photos.AlbumPhotos"
+        android:label="album_photos_fragment"
+        tools:layout="@layout/album_photos_fragment" >
+        <action
+            android:id="@+id/action_albumPhotos_to_fullPhoto"
+            app:destination="@id/fullPhoto" />
+    </fragment>
+    <fragment
+        android:id="@+id/fullPhoto"
+        android:name="com.example.fotoalbum.full_photo.FullPhoto"
+        android:label="full_photo_fragment"
+        tools:layout="@layout/full_photo_fragment" />
+</navigation>
