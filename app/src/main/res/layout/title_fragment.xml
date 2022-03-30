@@ -8,6 +8,9 @@
         <variable
             name="overviewViewModel"
             type="com.example.fotoalbum.overview.OverviewViewModel" />
+        <variable
+            name="titleFragment"
+            type="com.example.fotoalbum.overview.TitleFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
