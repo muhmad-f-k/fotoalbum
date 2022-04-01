@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="albumPhotos"
+            name="view"
             type="com.example.fotoalbum.album_photos.AlbumPhotos" />
     </data>
 

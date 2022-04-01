@@ -6,10 +6,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.fotoalbum.model.User
 import com.example.fotoalbum.repository.Repository
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class OverviewViewModel(private val repository: Repository) : ViewModel() {
 
-    val myResponse: MutableLiveData<User> = MutableLiveData()
+    val myResponse: MutableLiveData<Response<List<User>>> = MutableLiveData()
 
     fun getUsers(){
         viewModelScope.launch {

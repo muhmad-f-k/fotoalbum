@@ -1,14 +1,22 @@
 package com.example.fotoalbum.model
 
+import com.google.gson.annotations.SerializedName
+
 data class User(
+    val id: Int,
     val address: Address,
     val company: Company,
     val email: String,
-    val id: Int,
     val name: String,
     val phone: String,
     val username: String,
     val website: String
+)
+
+data class Album(
+    val id: Int,
+    val userId: Int,
+    val title: String
 )
 
 data class Address(

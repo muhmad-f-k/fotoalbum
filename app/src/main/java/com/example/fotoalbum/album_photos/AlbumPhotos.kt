@@ -23,10 +23,5 @@ class AlbumPhotos : Fragment() {
         return inflater.inflate(R.layout.album_photos_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AlbumPhotosViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
 }

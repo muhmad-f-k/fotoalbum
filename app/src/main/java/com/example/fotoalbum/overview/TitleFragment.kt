@@ -6,26 +6,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fotoalbum.MyClickListener
 import com.example.fotoalbum.R
 import com.example.fotoalbum.databinding.TitleFragmentBinding
-import com.example.fotoalbum.api.JsonApi
 import com.example.fotoalbum.repository.Repository
-import retrofit2.HttpException
-import java.io.IOException
 
-const val TAG = "TitleFragment"
-
-
-class TitleFragment : Fragment() {
+class TitleFragment : Fragment(), MyClickListener {
 
     private lateinit var viewModel: OverviewViewModel
     private lateinit var binding: TitleFragmentBinding
-    private lateinit var usersAdapter: UsersAdapter
+    private val usersAdapter by lazy { UsersAdapter(this) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -37,46 +32,35 @@ class TitleFragment : Fragment() {
             false
         )
 
+        setupRecyclerView()
         val repository = Repository()
+        binding.lifecycleOwner = this
         val viewModelFactory = OverviewViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(OverviewViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory)[OverviewViewModel::class.java]
         viewModel.getUsers()
+        binding.overviewViewModel = viewModel
 
-        viewModel.myResponse.observe(this, Observer { response ->
-            Log.d("Response", response[r].toString())
+        viewModel.myResponse.observe(viewLifecycleOwner, Observer { response ->
+            if(response.isSuccessful){
+                response.body()?.let { usersAdapter.setData(it) }
+            }
         })
 
-        binding.overviewViewModel = viewModel
-        binding.setLifecycleOwner(this)
-        setupRecyclerView()
-
-        lifecycleScope.launchWhenCreated {
-            binding.progressBar.isVisible = true
-            val response = try {
-                JsonApi.retrofitService.getUsers()
-            } catch(e: IOException) {
-                Log.e(TAG, "IOException, you might not have internet connection")
-                binding.progressBar.isVisible = false
-                return@launchWhenCreated
-            } catch (e: HttpException) {
-                Log.e(TAG, "HttpException, unexpected response")
-                binding.progressBar.isVisible = false
-                return@launchWhenCreated
-            }
-            if(response.isSuccessful && response.body() != null) {
-                usersAdapter.Users = response.body()!!
-            } else {
-                Log.e(TAG, "Response not successful")
-            }
-            binding.progressBar.isVisible = false
-        }
-
-        return inflater.inflate(R.layout.title_fragment, container, false)
+        return binding.root
     }
 
-    private fun setupRecyclerView() = binding.recyclerView.apply {
-        usersAdapter = UsersAdapter()
-        adapter = usersAdapter
-        layoutManager
+    private fun setupRecyclerView() {
+        binding.recyclerView.adapter = usersAdapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
+
+    override fun onClick(position: Int) {
+        var userId = usersAdapter.userList[position].id
+        var action = TitleFragmentDirections.actionTitleFragmentToUserAlbums(userId)
+        view?.findNavController()?.navigate(action)
+        Log.d("Response", "${usersAdapter.userList[position].id}")
+        Log.d("Response", "${usersAdapter.userList[position].name}")
+
+    }
+
 }

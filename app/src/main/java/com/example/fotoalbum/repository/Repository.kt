@@ -2,10 +2,16 @@ package com.example.fotoalbum.repository
 
 import com.example.fotoalbum.model.User
 import com.example.fotoalbum.api.RetrofitInstance
+import com.example.fotoalbum.model.Album
+import retrofit2.Response
 
 class Repository {
 
-    suspend fun getUsers() {
-        RetrofitInstance.api.getUsers()
+    suspend fun getUsers(): Response<List<User>> {
+        return RetrofitInstance.api.getUsers()
+    }
+
+    suspend fun getAlbums(userId: Int): Response<List<Album>> {
+        return RetrofitInstance.api.getAlbums(userId)
     }
 }

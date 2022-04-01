@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_userAlbums_to_albumPhotos"
             app:destination="@id/albumPhotos" />
+        <argument
+            android:name="userId"
+            app:argType="integer"/>
     </fragment>
     <fragment
         android:id="@+id/albumPhotos"
