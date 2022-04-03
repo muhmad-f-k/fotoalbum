@@ -64,8 +64,8 @@ class UserAlbums : Fragment(), MyClickListener {
     }
 
     override fun onClick(position: Int) {
-        var userId = albumsAdapter.albumList[position].id
-        var action = TitleFragmentDirections.actionTitleFragmentToUserAlbums(userId)
+        var albumId = albumsAdapter.albumList[position].id
+        var action = UserAlbumsDirections.actionUserAlbumsToAlbumPhotos(albumId)
         view?.findNavController()?.navigate(action)
         Log.d("Response", "${albumsAdapter.albumList[position].id}")
         Log.d("Response", "${albumsAdapter.albumList[position].title}")

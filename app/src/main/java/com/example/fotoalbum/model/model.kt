@@ -1,6 +1,7 @@
 package com.example.fotoalbum.model
 
 import com.google.gson.annotations.SerializedName
+import retrofit2.http.Url
 
 data class User(
     val id: Int,
@@ -17,6 +18,14 @@ data class Album(
     val id: Int,
     val userId: Int,
     val title: String
+)
+
+data class Photo(
+    val id: Int,
+    val albumId: Int,
+    val title: String,
+    val url: String,
+    val thumbnailUrl: String
 )
 
 data class Address(

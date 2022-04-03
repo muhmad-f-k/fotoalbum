@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_albumPhotos_to_fullPhoto"
             app:destination="@id/fullPhoto" />
+        <argument
+            android:name="albumId"
+            app:argType="integer"/>
     </fragment>
     <fragment
         android:id="@+id/fullPhoto"

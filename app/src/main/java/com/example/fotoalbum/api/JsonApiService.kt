@@ -1,11 +1,13 @@
 package com.example.fotoalbum.api
 
-import com.example.fotoalbum.model.Album
+import com.example.fotoalbum.model.Photo
 import com.example.fotoalbum.model.User
+import com.example.fotoalbum.model.Album
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -18,8 +20,13 @@ interface SimpleApi {
 
     @GET("/albums")
     suspend fun getAlbums(
-        @Query("userID") userId: Int
+        @Query("userId") userId: Int
     ): Response<List<Album>>
+
+    @GET("/photos")
+    suspend fun getPhotos(
+        @Query("albumId") albumId: Int
+    ): Response<List<Photo>>
 }
 
 object RetrofitInstance {
@@ -30,7 +37,12 @@ object RetrofitInstance {
         .build()
     }
 
+    private val moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
+
     val api: SimpleApi by lazy {
         retrofit.create(SimpleApi::class.java)
     }
+
 }

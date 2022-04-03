@@ -3,6 +3,7 @@ package com.example.fotoalbum.repository
 import com.example.fotoalbum.model.User
 import com.example.fotoalbum.api.RetrofitInstance
 import com.example.fotoalbum.model.Album
+import com.example.fotoalbum.model.Photo
 import retrofit2.Response
 
 class Repository {
@@ -13,5 +14,9 @@ class Repository {
 
     suspend fun getAlbums(userId: Int): Response<List<Album>> {
         return RetrofitInstance.api.getAlbums(userId)
+    }
+
+    suspend fun getPhotos(albumId: Int): Response<List<Photo>> {
+        return RetrofitInstance.api.getPhotos(albumId)
     }
 }
