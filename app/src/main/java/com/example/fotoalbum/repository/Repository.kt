@@ -19,4 +19,12 @@ class Repository {
     suspend fun getPhotos(albumId: Int): Response<List<Photo>> {
         return RetrofitInstance.api.getPhotos(albumId)
     }
+
+    suspend fun getFullPhoto(photoId: Int): Response<Photo> {
+        return RetrofitInstance.api.getFullPhoto(photoId)
+    }
+
+    suspend fun deletePhoto(photoId: Int): Response<Photo> {
+        return RetrofitInstance.api.deletePhoto(photoId)
+    }
 }

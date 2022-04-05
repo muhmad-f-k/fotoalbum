@@ -1,17 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".full_photo.FullPhoto">
 
     <data>
         <variable
-            name="fullPhoto"
-            type="com.example.fotoalbum.full_photo.FullPhoto" />
+            name="viewModel"
+            type="com.example.fotoalbum.full_photo.FullPhotoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/photoTitleLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/changeTitle"
+            app:layout_constraintEnd_toEndOf="@+id/changeTitle"
+            app:layout_constraintStart_toStartOf="@+id/changeTitle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/photoTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel._photoTitle}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/changeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Endre tittel"
+            app:layout_constraintBottom_toTopOf="@+id/fullPhoto"
+            app:layout_constraintEnd_toEndOf="@+id/deletePhoto"
+            app:layout_constraintStart_toStartOf="@+id/deletePhoto" />
+
+        <ImageView
+            android:id="@+id/fullPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/deletePhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.deletePhoto(viewModel._photoId)}"
+            android:text="Slett bilde"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fullPhoto" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

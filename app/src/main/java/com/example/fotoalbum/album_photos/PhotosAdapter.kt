@@ -49,6 +49,7 @@ class PhotosAdapter(val listener: MyClickListener) : RecyclerView.Adapter<Photos
 
     override fun onBindViewHolder(holder: PhotosViewHolder, position: Int) {
         var imgUrl = photoList[position].thumbnailUrl
+        holder.itemView.photoTitle.text = photoList[position].title
         val url = GlideUrl(
             imgUrl, LazyHeaders.Builder()
                 .addHeader("User-Agent", WebSettings.getDefaultUserAgent(holder.itemView.context))

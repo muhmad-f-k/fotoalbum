@@ -42,5 +42,9 @@
         android:id="@+id/fullPhoto"
         android:name="com.example.fotoalbum.full_photo.FullPhoto"
         android:label="full_photo_fragment"
-        tools:layout="@layout/full_photo_fragment" />
+        tools:layout="@layout/full_photo_fragment">
+        <argument
+            android:name="photoId"
+            app:argType="integer"/>
+    </fragment>
 </navigation>

@@ -7,6 +7,14 @@
     android:paddingTop="26dp"
     android:paddingBottom="26dp">
 
+    <TextView
+        android:id="@+id/photoTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/album_photo"
+        app:layout_constraintEnd_toEndOf="@+id/album_photo"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ImageView
         android:id="@+id/album_photo"
         android:layout_width="match_parent"

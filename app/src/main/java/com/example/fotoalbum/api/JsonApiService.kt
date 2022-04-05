@@ -5,11 +5,11 @@ import com.example.fotoalbum.model.User
 import com.example.fotoalbum.model.Album
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
 private const val BASE_URL = "https://jsonplaceholder.typicode.com"
 
@@ -27,6 +27,16 @@ interface SimpleApi {
     suspend fun getPhotos(
         @Query("albumId") albumId: Int
     ): Response<List<Photo>>
+
+    @GET("/photos/{photoId}")
+    suspend fun getFullPhoto(
+        @Path("photoId") photoId: Int
+    ): Response<Photo>
+
+    @DELETE("/photos/{photoId}")
+    suspend fun deletePhoto(
+        @Path("photoId") photoId: Int
+    ): Response<Photo>
 }
 
 object RetrofitInstance {
