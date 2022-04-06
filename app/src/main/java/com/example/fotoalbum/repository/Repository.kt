@@ -5,6 +5,7 @@ import com.example.fotoalbum.api.RetrofitInstance
 import com.example.fotoalbum.model.Album
 import com.example.fotoalbum.model.Photo
 import retrofit2.Response
+import retrofit2.http.POST
 
 class Repository {
 
@@ -26,5 +27,9 @@ class Repository {
 
     suspend fun deletePhoto(photoId: Int): Response<Photo> {
         return RetrofitInstance.api.deletePhoto(photoId)
+    }
+
+    suspend fun changeTitle(photoId: Int, post: POST): Response<Photo> {
+        return RetrofitInstance.api.changeTitle(photoId, post)
     }
 }

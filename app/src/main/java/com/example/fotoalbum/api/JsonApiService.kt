@@ -37,6 +37,12 @@ interface SimpleApi {
     suspend fun deletePhoto(
         @Path("photoId") photoId: Int
     ): Response<Photo>
+
+    @POST("/photos/{photoId}")
+    suspend fun changeTitle(
+        @Path("photoId") photoId: Int,
+        @Body post: POST
+    ): Response<Photo>
 }
 
 object RetrofitInstance {
