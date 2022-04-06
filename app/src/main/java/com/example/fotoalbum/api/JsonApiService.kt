@@ -41,7 +41,7 @@ interface SimpleApi {
     @POST("/photos/{photoId}")
     suspend fun changeTitle(
         @Path("photoId") photoId: Int,
-        @Body post: POST
+        @Body photo: Photo
     ): Response<Photo>
 }
 

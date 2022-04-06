@@ -36,9 +36,9 @@ class FullPhotoViewModel(private val repository: Repository) : ViewModel() {
         _photoTitle.value = title
     }
 
-    fun changeTitle(photoId: Int, post: POST) {
+    fun changeTitle(photoId: Int, photo: Photo) {
         viewModelScope.launch {
-            val response = repository.changeTitle(photoId, post)
+            val response = repository.changeTitle(photoId, photo)
             postResponse.value = response
         }
     }

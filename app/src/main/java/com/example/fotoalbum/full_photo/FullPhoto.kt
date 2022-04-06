@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.LazyHeaders
 import com.example.fotoalbum.R
+import com.example.fotoalbum.album_photos.AlbumPhotosViewModel
 import com.example.fotoalbum.databinding.FullPhotoFragmentBinding
 import com.example.fotoalbum.model.Photo
 import com.example.fotoalbum.repository.Repository
@@ -75,8 +76,14 @@ class FullPhoto : Fragment() {
         })
 
         binding.changeTitle.setOnClickListener {
-            val photo = Photo(photoId, )
-            viewModel.changeTitle(photoId, )
+            val photo = Photo(photoId, viewModel.myResponse.value!!.body()!!.albumId,
+                viewModel._photoTitle.value!!, viewModel.myResponse.value!!.body()!!.url, viewModel.myResponse.value!!.body()!!.thumbnailUrl)
+            viewModel.changeTitle(photoId, photo)
+            viewModel. myResponse.observe(viewLifecycleOwner, Observer { response ->
+                if (response.isSuccessful) {
+                    Log.d("Response", "Tittelen er endret")
+                }
+            })
         }
 
         return binding.root

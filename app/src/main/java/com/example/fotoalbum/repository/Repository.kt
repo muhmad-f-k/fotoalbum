@@ -29,7 +29,7 @@ class Repository {
         return RetrofitInstance.api.deletePhoto(photoId)
     }
 
-    suspend fun changeTitle(photoId: Int, post: POST): Response<Photo> {
-        return RetrofitInstance.api.changeTitle(photoId, post)
+    suspend fun changeTitle(photoId: Int, photo: Photo): Response<Photo> {
+        return RetrofitInstance.api.changeTitle(photoId, photo)
     }
 }
